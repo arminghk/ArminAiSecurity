@@ -1,0 +1,21 @@
+{
+  "name": "armin-security-ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ARMIN Security AI - AI-powered security assessment platform",
+  "packageManager": "pnpm@12.3.4",
+  "scripts": {
+    "dev": "pnpm --parallel --filter './apps/*' dev",
+    "build": "pnpm --recursive build",
+    "lint": "pnpm --recursive lint",
+    "test": "pnpm --recursive test",
+    "format": "pnpm exec prettier --write ."
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^12.0.0"
+  }
+}
