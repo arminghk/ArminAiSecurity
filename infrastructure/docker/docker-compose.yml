@@ -50,6 +50,26 @@ services:
       - armin_minio_data:/data
     command: server /data --console-address ":9001"
 
+  minio-init:
+    image: minio/mc:latest
+    container_name: armin-minio-init
+    depends_on:
+      minio:
+        condition: service_started
+    entrypoint: >
+      /bin/sh -c "
+      until mc alias set armin http://minio:9000
+      ${STORAGE_ACCESS_KEY:-armin}
+      ${STORAGE_SECRET_KEY:-arminpassword};
+      do
+        echo 'Waiting for MinIO...';
+        sleep 2;
+      done;
+      mc mb --ignore-existing
+      armin/${STORAGE_BUCKET:-armin-security};
+      exit 0;
+      "
+
 volumes:
   armin_postgres_data:
   armin_redis_data:

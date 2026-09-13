@@ -2,7 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import configuration from './config/configuration';
+import { DatabaseModule } from './database/database.module';
 import { HealthModule } from './health/health.module';
+import { RedisModule } from './redis/redis.module';
 
 @Module({
   imports: [
@@ -11,6 +13,8 @@ import { HealthModule } from './health/health.module';
       load: [configuration],
     }),
 
+    DatabaseModule,
+    RedisModule,
     HealthModule,
   ],
 })
